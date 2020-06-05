@@ -1,0 +1,104 @@
+﻿@using WebApplication1.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebApplication1.Models.SANPHAM>
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "SẢN PHẨM";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    #Create {
+        width: 120px;
+        height: 25px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+
+        #Create:hover {
+            background-color: #05efda;
+        }
+
+        #Create a {
+            color: darkblue;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    tr, td {
+        text-align: left;
+        font-size: 16px;
+    }
+</style>
+<h2 style="font-weight:bold">QUẢN LÝ THÔNG TIN SẢN PHẨM</h2>
+
+<p>
+    <div id="Create">
+        <a href="@Url.Action("ThemmoiSP","Admin")">Tạo mới</a>
+    </div>
+</p>
+<table class="table" border="1">
+    <tr class="table" style="font-size:18px">
+        <th style="width:200px">Tên sản phẩm</th>
+        <th style="width:200px">Giá sản phẩm</th>
+        <th style="width:200px">Mô tả</th>
+        <th style="width:200px">Ảnh bìa</th>
+        <th style="width:200px">Ngày cập nhật</th>
+        <th style="width:200px">Số lượng tồn</th>
+        <th style="width:200px">Tên NSX</th>
+        <th style="width:200px">Điều chỉnh</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-weight:bold">
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.Giaban) đồng
+            </td>
+            <td>
+                @Truncate(item.Mota, 1000)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Images/" + item.Anhbia)" width="120" />
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.Ngaycapnhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluongton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HANG.MaHang)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }) |
+                @Html.ActionLink("Chi tiết", "ChitietSP", new { id = item.MaSP }) |
+                @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP })
+            </td>
+        </tr>
+    }
+</table>
+@**@
+<div style="text-align:center">
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+

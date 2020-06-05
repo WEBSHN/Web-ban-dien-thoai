@@ -1,0 +1,78 @@
+﻿@using WebApplication1.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebApplication1.Models.HANG>
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "NHÀ SẢN XUẤT";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    #Create {
+        width: 120px;
+        height: 25px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+
+        #Create:hover {
+            background-color: #05efda;
+        }
+
+        #Create a {
+            color: darkblue;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    tr, td {
+        text-align: left;
+        font-size: 16px;
+    }
+</style>
+<h2 style="font-weight:bold">QUẢN LÝ THÔNG TIN NHÀ SẢN XUẤT</h2>
+
+<p>
+    <div id="Create">
+        <a href="@Url.Action("ThemmoiHang","Admin")">Tạo mới</a>
+    </div>
+</p>
+<table class="table" border="1">
+    <tr class="table" style="font-size:18px">
+        <th style="width:200px">Tên nhà sản xuất</th>
+        <th style="width:200px">Điều chỉnh</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="font-weight:bold">
+                @Html.DisplayFor(modelItem => item.TenHang)
+            </td>
+            <td>
+              
+                @Html.ActionLink("Xóa", "XoaHang", new { id = item.MaHang })
+            </td>
+        </tr>
+    }
+</table>
+@**@
+<div style="text-align:center">
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Hang", new { page = page }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
