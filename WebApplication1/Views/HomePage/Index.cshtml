@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication1.Models.SANPHAM>
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    h3{        
+        text-align:left;
+        color:#FFF;
+        font-weight:bold; 
+        background-color:black;
+        padding-bottom:5px;
+        padding-top:10px;
+    }
+    h3 span{
+        padding-left:20px;
+    }
+</style>
+<h3> <span><img src="~/Images/icon.png" width="40"/> SẢN PHẨM MỚI</span> </h3>
+@foreach (var sp in Model)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <a href="@Url.Action("Details","HomePage",new { id=sp.MaSP})"/>
+            <img alt="@sp.TenSP" src="~/Images/@sp.Anhbia" style="width:200px;height:200px"/>
+                <div>
+                    <br/>
+                    <h4 style="text-align:center">
+                        @sp.TenSP
+                    </h4>
+                    <p></p>
+                 </div>                 
+                <div style="text-align:center;font-size:18px;color:black">
+                    Giá: @String.Format("{0:0,0}", @sp.Giaban) đồng
+                </div>
+            <div class="ratings">
+                <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+            </div>
+            <div style="background-color:#808080; color:#ffffff;padding-bottom:10px;padding-top:10px; text-align:center">
+                <a href="#" style="color:#ffffff;font-weight:bold">Xem chi tiết sản phẩm</a>
+            </div>
+          </div>
+    </div>
+}
+

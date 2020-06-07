@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    #Datmua a {
+        clear: both;
+        background-color: #d1c706;
+        color: white;
+        width: 150px;
+        height: 50px;
+        display: block;
+        float: right;
+        text-align: center;
+        margin-right:20px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size:16px;
+    }
+    #Datmua a:hover{
+        background-color:#c30a87;
+        color:black;
+    }
+    #anh{
+        width:40%;
+        float:left;
+        border-left:dotted 1px;
+        border-color:azure;
+    }
+</style>
+<div style="border:groove;height:600px">
+    <h2 style="text-align:center;border-bottom:groove;padding-bottom:8px;font-weight:bold;color:blue"> THÔNG TIN CHI TIẾT SẢN PHẨM</h2>
+    <div>
+        <div id="anh" style="float:left">
+            <img src="~/Images/@Model.Anhbia" style="width:350px"/>
+        </div>
+        <div style="width:60%;float:left;padding:10px">
+            <h4 style="font-weight:bold;color:#4800ff;text-align:center">Tên sản phẩm: @Model.TenSP</h4>
+            <p style="text-align:justify;font-size:20px"><span style="font-weight:bold">Mô tả sản phẩm:</span></p>
+            <p style="font-size:16px">@Model.Mota</p>
+            <p style="font-weight:bold;font-size:20px">Giá bán: <span style="color:#4800ff;font-size:16px"></span></p>
+            <p style="font-size:20px;float:right">@String.Format("{0:0,0}", @Model.Giaban) đồng</p>
+        </div>
+        <a href="https://www.baokim.vn/payment/product/version11?business=dkhoang141298%40gmail.com&id=&order_description=%C4%90i%E1%BB%87n+tho%E1%BA%A1i+gi%C3%A1+t%E1%BB%91t&product_name=SamSung+Galaxy+A7%282018%29+128GB&product_price=6990000&product_quantity=1&total_amount=6990000&url_cancel=&url_detail=&url_success="><img src="~/Images/thanhtoanantoan-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn"></a>    <title>@ViewBag.Title - SHN.com.vn | Cửa hàng di động giá rẻ</title>
+        <div id="Datmua">
+            <a href="@Url.Action("ThemGiohang", "Giohang", new { @iMaSP= @Model.MaSP,@strURL=Request.Url.ToString()})" class="list-group-item">
+                <img src="~/Images/giohang.png" width="40"/> Đặt mua
+            </a>
+        </div>
+    </div>
+</div>
+
